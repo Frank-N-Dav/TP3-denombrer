@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Problème des n reines</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20px;
+    gap: 40px;
+  }
+  #mainArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  canvas {
+    border: 2px solid #1565c0;
+    border-radius: 6px;
+  }
+  #solutionsPanel {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    width: 220px;
+  }
+  .solution {
+    display: inline-block;
+    margin: 5px;
+  }
+  .solution div {
+    display: grid;
+    overflow: hidden;
+  }
+  .solution .cell {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0d47a1;
+  }
+</style>
+</head>
+<body>
+
+<div id="mainArea">
+  <h1>Problème des n reines</h1>
+  <p>Choisir la taille de l'échiquier :</p>
+  <select id="sizeSelect">
+    <option value="3">3 × 3</option>
+    <option value="4" selected>4 × 4</option>
+    <option value="5">5 × 5</option>
+    <option value="6">6 × 6</option>
+  </select>
+  <canvas id="boardCanvas" width="350" height="350"></canvas>
+  <p>Solutions valides trouvées : <span id="solutionCount">0</span>/<span id="totalSolutions">0</span></p>
+</div>
+
+<div id="solutionsPanel">
+  <h2>Solutions :</h2>
+  <div id="solutionsList"></div>
+</div>
+
+<script>
+let size = parseInt(document.getElementById('sizeSelect').value);
+let board = [];
+let solutionCount = 0;
+let solutions = [];
+let totalSolutions = 0;
+
+const canvas = document.getElementById('boardCanvas');
+const ctx = canvas.getContext('2d');
+const solutionCountSpan = document.getElementById('solutionCount');
+const totalSolutionsSpan = document.getElementById('totalSolutions');
+const solutionsListDiv = document.getElementById('solutionsList');
+const sizeSelect = document.getElementById('sizeSelect');
+
+function createBoard() {
+  board = Array(size).fill(null).map(() => Array(size).fill(false));
+  renderBoard();
+  computeTotalSolutions();
+  solutions = [];
+  solutionCount = 0;
+  solutionCountSpan.textContent = solutionCount;
+  solutionsListDiv.innerHTML = '';
+}
+
+function renderBoard() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const cellSize = canvas.width / size;
+
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      ctx.fillStyle = (r + c) % 2 ? '#90caf9' : '#e3f2fd';
+      ctx.fillRect(c * cellSize, r * cellSize, cellSize, cellSize);
+
+      if (board[r][c]) {
+        ctx.fillStyle = isCellValid(r, c) ? '#0d47a1' : 'red';
+        ctx.font = `${cellSize * 0.8}px serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText('♛', c * cellSize + cellSize / 2, r * cellSize + cellSize / 2);
+      }
+    }
+  }
+}
+
+canvas.addEventListener('click', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const cellSize = canvas.width / size;
+  const c = Math.floor(x / cellSize);
+  const r = Math.floor(y / cellSize);
+
+  board[r][c] = !board[r][c];
+  renderBoard();
+
+  if (countQueens() === size && isValidBoard()) {
+    const boardStr = board.map(row => row.map(cell => cell ? 'Q' : '.').join('')).join(',');
+    if (!solutions.includes(boardStr)) {
+      solutions.push(boardStr);
+      solutionCount++;
+      solutionCountSpan.textContent = solutionCount;
+      addSolutionVisual(boardStr);
+
+      // Réinitialisation après 2 secondes
+      setTimeout(() => {
+        board = Array(size).fill(null).map(() => Array(size).fill(false));
+        renderBoard();
+      }, 2000);
+    }
+  }
+});
+
+function countQueens() {
+  return board.flat().filter(v => v).length;
+}
+
+function isValidBoard() {
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      if (board[r][c] && !isCellValid(r, c)) return false;
+    }
+  }
+  return true;
+}
+
+function isCellValid(r, c) {
+  for (let i = 0; i < size; i++) {
+    if (i !== r && board[i][c]) return false;
+    if (i !== c && board[r][i]) return false;
+  }
+  for (let i = -size; i < size; i++) {
+    if (r+i >= 0 && r+i < size && c+i >= 0 && c+i < size && i !== 0 && board[r+i][c+i]) return false;
+    if (r+i >= 0 && r+i < size && c-i >= 0 && c-i < size && i !== 0 && board[r+i][c-i]) return false;
+  }
+  return true;
+}
+
+function addSolutionVisual(boardStr) {
+  const solDiv = document.createElement('div');
+  solDiv.className = 'solution';
+  const gridDiv = document.createElement('div');
+  gridDiv.style.gridTemplateColumns = `repeat(${size}, 16px)`;
+  gridDiv.style.gridTemplateRows = `repeat(${size}, 16px)`;
+
+  const rows = boardStr.split(',');
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      const cellDiv = document.createElement('div');
+      cellDiv.className = 'cell';
+      cellDiv.style.width = '16px';
+      cellDiv.style.height = '16px';
+      cellDiv.style.backgroundColor = ((r+c)%2 ? '#90caf9' : '#e3f2fd');
+      cellDiv.textContent = rows[r][c] === 'Q' ? '♛' : '';
+      gridDiv.appendChild(cellDiv);
+    }
+  }
+  solDiv.appendChild(gridDiv);
+  solutionsListDiv.appendChild(solDiv);
+}
+
+// Calculer le nombre total de solutions avec backtracking
+function computeTotalSolutions() {
+  let count = 0;
+  function backtrack(row, cols, diag1, diag2) {
+    if (row === size) {
+      count++;
+      return;
+    }
+    for (let col = 0; col < size; col++) {
+      if (cols.has(col) || diag1.has(row-col) || diag2.has(row+col)) continue;
+      cols.add(col);
+      diag1.add(row-col);
+      diag2.add(row+col);
+      backtrack(row+1, cols, diag1, diag2);
+      cols.delete(col);
+      diag1.delete(row-col);
+      diag2.delete(row+col);
+    }
+  }
+  backtrack(0, new Set(), new Set(), new Set());
+  totalSolutions = count;
+  totalSolutionsSpan.textContent = totalSolutions;
+}
+
+// Changer la taille
+sizeSelect.addEventListener('change', () => {
+  size = parseInt(sizeSelect.value);
+  createBoard();
+});
+
+createBoard();
+</script>
+
+</body>
+</html>

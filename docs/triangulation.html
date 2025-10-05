@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Triangulation interactive colorée</title>
+<style>
+  canvas { border:1px solid black; margin-top:20px; }
+  #controls { margin-bottom:10px; }
+  #message { margin-top:10px; font-weight:bold; }
+  #saved { margin-top:20px; display:flex; gap:10px; flex-wrap: wrap; }
+  #saved img { border:1px solid #ccc; width:100px; height:100px; object-fit:contain; }
+</style>
+</head>
+<body>
+
+<h2>Triangulation de polygones (4 à 6 côtés)</h2>
+
+<div id="controls">
+  <label for="sides">Nombre de côtés : </label>
+  <select id="sides">
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+  </select>
+  <button id="reset">Réinitialiser</button>
+</div>
+
+<canvas id="canvas" width="500" height="500"></canvas>
+<div id="message"></div>
+<h3>Triangulations sauvegardées :</h3>
+<div id="saved"></div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+let sides = 4;
+let radius = 200;
+let center = {x:250, y:250};
+let vertices = [];
+let diagonals = [];
+let selectedVertex = null;
+let mousePos = {x:0, y:0};
+let savedConfigurations = [];
+const catalanNumbers = [2,5,14]; // total triangulations pour n=4,5,6
+let colors = [];
+
+// Initialisation polygone
+function initPolygon(){
+    vertices=[];
+    diagonals=[];
+    selectedVertex=null;
+    colors=[];
+    const angleStep = 2*Math.PI/sides;
+    for(let i=0;i<sides;i++){
+        const angle = i*angleStep - Math.PI/2;
+        vertices.push({x:center.x + radius*Math.cos(angle), y:center.y + radius*Math.sin(angle), index:i});
+    }
+    drawPolygon();
+    updateMessage();
+}
+
+// Dessin
+function drawPolygon(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    // Dessin triangles colorés
+    const triangles = computeTriangles();
+    if(triangles.length>0){
+        for(let i=0;i<triangles.length;i++){
+            ctx.beginPath();
+            ctx.moveTo(vertices[triangles[i][0]].x, vertices[triangles[i][0]].y);
+            ctx.lineTo(vertices[triangles[i][1]].x, vertices[triangles[i][1]].y);
+            ctx.lineTo(vertices[triangles[i][2]].x, vertices[triangles[i][2]].y);
+            ctx.closePath();
+            if(!colors[i]) colors[i]='hsl(' + Math.random()*360 + ',70%,70%)';
+            ctx.fillStyle = colors[i];
+            ctx.fill();
+            ctx.strokeStyle='black';
+            ctx.stroke();
+        }
+    }
+
+    // Polygone
+    ctx.beginPath();
+    ctx.moveTo(vertices[0].x, vertices[0].y);
+    for(let i=1;i<vertices.length;i++) ctx.lineTo(vertices[i].x, vertices[i].y);
+    ctx.closePath();
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Diagonales tracées
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = 2;
+    for(let d of diagonals){
+        ctx.beginPath();
+        ctx.moveTo(vertices[d[0]].x, vertices[d[0]].y);
+        ctx.lineTo(vertices[d[1]].x, vertices[d[1]].y);
+        ctx.stroke();
+    }
+
+    // Diagonale temporaire
+    if(selectedVertex !== null){
+        ctx.beginPath();
+        ctx.moveTo(vertices[selectedVertex].x, vertices[selectedVertex].y);
+        ctx.lineTo(mousePos.x, mousePos.y);
+        ctx.strokeStyle = 'gray';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+    }
+
+    // Sommets
+    for(let v of vertices){
+        ctx.beginPath();
+        ctx.arc(v.x,v.y,6,0,2*Math.PI);
+        ctx.fillStyle='blue';
+        ctx.fill();
+    }
+}
+
+// Détection sommet cliqué
+function getVertexClick(x,y){
+    for(let v of vertices){
+        const dx = x-v.x;
+        const dy = y-v.y;
+        if(Math.sqrt(dx*dx+dy*dy)<10) return v.index;
+    }
+    return null;
+}
+
+// Vérification diagonale valide (ne coupe pas une diagonale existante ni un côté)
+function validDiagonal(v1,v2){
+    if(Math.abs(v1-v2)===1 || Math.abs(v1-v2)===sides-1) return false; // côté du polygone
+    // Vérifier si croisement avec d'autres diagonales
+    for(let d of diagonals){
+        const [a,b]=d;
+        if([v1,v2].includes(a) || [v1,v2].includes(b)) continue; // partage sommet autorisé
+        if(segmentsIntersect(vertices[v1], vertices[v2], vertices[a], vertices[b])) return false;
+    }
+    return true;
+}
+
+// Détection intersection segments (robuste)
+function segmentsIntersect(p1,p2,p3,p4){
+    function ccw(a,b,c){return (c.y-a.y)*(b.x-a.x) > (b.y-a.y)*(c.x-a.x);}
+    return ccw(p1,p3,p4) !== ccw(p2,p3,p4) && ccw(p1,p2,p3) !== ccw(p1,p2,p4);
+}
+
+// Clic sur canvas
+canvas.addEventListener('click', e=>{
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const clicked = getVertexClick(x,y);
+    if(clicked !== null){
+        if(selectedVertex === null){
+            selectedVertex = clicked;
+        } else {
+            if(clicked !== selectedVertex && validDiagonal(selectedVertex, clicked)){
+                diagonals.push([selectedVertex, clicked]);
+                updateMessage(`Diagonale tracée !`);
+            } else {
+                updateMessage(`Diagonale invalide.`);
+            }
+            selectedVertex = null;
+            drawPolygon();
+            if(diagonals.length === sides-3){
+                if(saveConfiguration()){
+                    updateMessage(`Nouvelle triangulation trouvée !`);
+                } else {
+                    updateMessage(`Triangulation déjà trouvée.`);
+                }
+                setTimeout(initPolygon, 1000);
+            }
+        }
+    }
+});
+
+// Suivi souris
+canvas.addEventListener('mousemove', e=>{
+    const rect = canvas.getBoundingClientRect();
+    mousePos.x = e.clientX - rect.left;
+    mousePos.y = e.clientY - rect.top;
+    drawPolygon();
+});
+
+// Mettre à jour message et compteur
+function updateMessage(text){
+    const counter = `${savedConfigurations.length} / ${catalanNumbers[sides-4]}`;
+    document.getElementById('message').textContent = (text? text+' ':'') + `Triangulations trouvées : ${counter}`;
+}
+
+// Calculer triangles à partir des diagonales et côtés
+function computeTriangles(){
+    let allEdges = [];
+    for(let i=0;i<sides;i++){
+        allEdges.push([i,(i+1)%sides]);
+    }
+    allEdges = allEdges.concat(diagonals);
+    let triangles = [];
+    for(let i=0;i<sides;i++){
+        for(let j=i+1;j<sides;j++){
+            for(let k=j+1;k<sides;k++){
+                const edges = [[i,j],[j,k],[k,i]];
+                if(edges.every(e=>allEdges.some(a=>(a[0]===e[0] && a[1]===e[1])||(a[0]===e[1] && a[1]===e[0])))){
+                    triangles.push([i,j,k]);
+                }
+            }
+        }
+    }
+    return triangles;
+}
+
+// Sauvegarder la configuration et créer image miniature
+function saveConfiguration(){
+    // Vérifier si déjà sauvegardé
+    for(let conf of savedConfigurations){
+        if(conf.length === diagonals.length && conf.every((d,i)=>(d[0]===diagonals[i][0] && d[1]===diagonals[i][1])||(d[0]===diagonals[i][1] && d[1]===diagonals[i][0]))){
+            return false;
+        }
+    }
+    savedConfigurations.push(JSON.parse(JSON.stringify(diagonals)));
+
+    // Créer image miniature
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = 100;
+    tempCanvas.height = 100;
+    const tctx = tempCanvas.getContext('2d');
+
+    // Redimensionner polygone
+    const scale = 100/(radius*2 + 20);
+    const offset = 50;
+    tctx.strokeStyle = 'black';
+    tctx.lineWidth = 1;
+    const scaledVertices = vertices.map(v=>({x:offset+(v.x-center.x)*scale, y:offset+(v.y-center.y)*scale}));
+
+    // Triangles colorés
+    const triangles = computeTriangles();
+    for(let i=0;i<triangles.length;i++){
+        tctx.beginPath();
+        tctx.moveTo(scaledVertices[triangles[i][0]].x, scaledVertices[triangles[i][0]].y);
+        tctx.lineTo(scaledVertices[triangles[i][1]].x, scaledVertices[triangles[i][1]].y);
+        tctx.lineTo(scaledVertices[triangles[i][2]].x, scaledVertices[triangles[i][2]].y);
+        tctx.closePath();
+        tctx.fillStyle = colors[i] || 'gray';
+        tctx.fill();
+        tctx.stroke();
+    }
+
+    // Ajouter image
+    const img = document.createElement('img');
+    img.src = tempCanvas.toDataURL();
+    document.getElementById('saved').appendChild(img);
+
+    return true;
+}
+
+// Réinitialiser
+document.getElementById('sides').addEventListener('change', e=>{
+    sides=parseInt(e.target.value);
+    savedConfigurations = [];
+    document.getElementById('saved').innerHTML='';
+    initPolygon();
+});
+document.getElementById('reset').addEventListener('click', ()=>{
+    savedConfigurations = [];
+    document.getElementById('saved').innerHTML='';
+    initPolygon();
+});
+
+initPolygon();
+</script>
+
+</body>
+</html>
