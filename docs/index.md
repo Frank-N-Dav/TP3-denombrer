@@ -62,7 +62,7 @@ from math import factorial
 Il se peut parfois que l'intuition mette en défaut un résultat. 
 
 <center>
-  <img src="./images/intuition.png" alt="image" width="400" height="auto">
+  <img src="./images/intuition.png" alt="image" width="150" height="auto">
 </center>
 
 On s'intéresse à un cercle donné et on y place des points sur sa frontière. En reliant ces points par des lignes droites, le cercle initial est découpé en régions.  
