@@ -1,0 +1,1315 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>Génération de suites</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.2a3383ac.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#denombrer-en-informatique" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="." title="Génération de suites" class="md-header__button md-logo" aria-label="Génération de suites" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Génération de suites
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Dénombrer en informatique
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Dénombrer en informatique
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Génération de suites" class="md-nav__button md-logo" aria-label="Génération de suites" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Génération de suites
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Dénombrer en informatique
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dénombrer en informatique
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#la-factorielle" class="md-nav__link">
+    <span class="md-ellipsis">
+      La factorielle
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deviner-nest-pas-compter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deviner n'est pas compter !
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#les-nombres-de-catalan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Les nombres de Catalan
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#le-probleme-des-8-dames" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le problème des 8 dames
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="denombrer-en-informatique">Dénombrer en informatique</h1>
+<p>Dénombrer des éléments a toujours été une nécessité pour les êtres humains. Des premiers échanges commerciaux jusqu'à aujourd'hui, dénombrer rapidement a souvent été un thème central du questionnement mathématique.</p>
+<p>On s'intéresse dans ce TP à différents problèmes de dénombrement.</p>
+<center>
+    <img src="./images/count.png" alt="image" width="600" height="auto">
+</center>
+
+<h2 id="la-factorielle">La factorielle</h2>
+<p>La factorielle d'un entier naturel <span class="arithmatex">\(n\)</span> correspond au produit de tous les entiers compris entre <span class="arithmatex">\(1\)</span> et <span class="arithmatex">\(n\)</span>. Il est noté <span class="arithmatex">\(n!\)</span>.  </p>
+<p>Par exemple, on a :</p>
+<div class="arithmatex">\[
+4! = 1\times 2\times 3\times 4 = 24
+\]</div>
+<p>Il est facile de programmer en Python une fonction qui renvoie la factorielle d'un entier <span class="arithmatex">\(n\)</span> mais il est également possible de récupérer une telle
+fonction depuis le module <strong>math</strong>.</p>
+<p>Ouvrez le logiciel <strong>Thonny</strong> et créez un nouveau script avec le code :</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Factorielle</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">factorial</span>   
+</code></pre></div></td></tr></table></div>
+<ol>
+<li>Vérifiez dans la console que <span class="arithmatex">\(4! = 24\)</span> et que <span class="arithmatex">\(5! = 120\)</span>.</li>
+<li>Testez l'instruction <code>[factorial(k) for k in range(15)]</code> qui calcule les factorielles des entiers de <span class="arithmatex">\(0\)</span> à <span class="arithmatex">\(14\)</span>.</li>
+<li>Un problème classique en mathématiques est de déterminer le nombre de <span class="arithmatex">\(0\)</span> qui sont situés à la fin d'une factorielle.<br />
+  Par exemple, <span class="arithmatex">\(5!\)</span> se termine par un seul <span class="arithmatex">\(0\)</span> alors que <span class="arithmatex">\(10!\)</span> se termine avec deux <span class="arithmatex">\(0\)</span>.<br />
+  Pour programmer une fonction qui détermine le nombre de zéros à la fin d'une factorielle, on peut utiliser l'algorigramme :
+<br />
+<center>
+      <img src="./images/algo.png" alt="image" width="400" height="auto">
+  </center></li>
+</ol>
+<p>L'instruction <code>x % 10</code> permet de récupérer le chiffre des unités alors que <code>x // 10</code> le supprime du nombre <code>x</code>.<br />
+  Complétez le code ci-dessous pour qu'il respecte l'algorigramme précédent :
+  <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Factorielle</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">factorial</span>   
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">  </span><span class="sd">&#39;&#39;&#39;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="sd">    Retourne le nombre de 0 à la fin de n!</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="sd">  &#39;&#39;&#39;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a>  <span class="n">x</span>   <span class="o">=</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a>  <span class="n">cpt</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a>  <span class="k">while</span> <span class="o">...</span> <span class="p">:</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a>      <span class="n">cpt</span> <span class="o">=</span> <span class="o">...</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a>      <span class="n">x</span>   <span class="o">=</span> <span class="o">...</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a>  <span class="k">return</span> <span class="n">cpt</span>
+</code></pre></div></td></tr></table></div></p>
+<ol>
+<li>Vérifiez que <span class="arithmatex">\(2025!\)</span> possède <span class="arithmatex">\(505\)</span> zéros finaux.</li>
+</ol>
+<h2 id="deviner-nest-pas-compter">Deviner n'est pas compter !</h2>
+<p>Il se peut parfois que l'intuition mette en défaut un résultat. </p>
+<center>
+  <img src="./images/intuition.png" alt="image" width="150" height="auto">
+</center>
+
+<p>On s'intéresse à un cercle donné et on y place des points sur sa frontière. En reliant ces points par des lignes droites, le cercle initial est découpé en régions.  </p>
+<p>Lorsqu'on place un point sur le cercle, on ne définit qu'une seule région ;<br />
+Lorsqu'on place deux points, on définit deux régions, etc.</p>
+<p>La question porte sur l'évolution de cette suite.</p>
+<ol>
+<li>En plaçant des points sur le cercle ci-dessous, observez comment le nombre de régions évolue jusque <span class="arithmatex">\(n=5\)</span> points.<br />
+Placez alors un sixième point.</li>
+</ol>
+<div class="map1">
+
+<style>
+  #wrap { text-align:center; display:flex; flex-direction: column; align-items: center;}
+  canvas { background: white; border-radius:12px; box-shadow:0 6px 20px rgba(10,10,30,0.08); cursor:pointer; display:block; }
+  #controls { margin:12px 0; font-family:system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial; }
+  button { margin-left:8px; padding:6px 10px; border-radius:6px; border:1px solid #ccc; background:white; cursor:pointer; }
+  #info { margin-top:8px; font-size:14px; color:#333; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="c" width="500" height="500"></canvas>
+  <div id="controls">
+    <button id="clearBtn">Effacer</button>
+  </div>
+</div>
+
+<script>
+const Ex1canvas = document.getElementById('c');
+const Ex1ctx = Ex1canvas.getContext('2d');
+const center = { x: Ex1canvas.width/2, y: Ex1canvas.height/2 };
+const radius = Math.min(Ex1canvas.width, Ex1canvas.height)/2 - 30;
+
+let points = [];
+let chords = [];
+let regionData = []; // {id,color,center,selected}
+let lastRegionMap = null;
+
+const clearBtn = document.getElementById('clearBtn');
+const statsEl = document.getElementById('stats');
+const selCountEl = document.getElementById('selCount');
+
+/* Pastel random */
+function pastelColor(alpha=0.7){
+  const r = Math.floor((Math.random()*127)+127);
+  const g = Math.floor((Math.random()*127)+127);
+  const b = Math.floor((Math.random()*127)+127);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+/* Segment intersection */
+function segIntersects(a,b,c,d){
+  const r = { x: b.x - a.x, y: b.y - a.y };
+  const s = { x: d.x - c.x, y: d.y - c.y };
+  const denom = r.x * s.y - r.y * s.x;
+  if (Math.abs(denom) < 1e-9) return false;
+  const t = ((c.x - a.x) * s.y - (c.y - a.y) * s.x) / denom;
+  const u = ((c.x - a.x) * r.y - (c.y - a.y) * r.x) / denom;
+  return (t >= 0 && t <= 1 && u >= 0 && u <= 1);
+}
+
+/* Build all chords */
+function buildChords(){
+  chords.length = 0;
+  for (let i=0;i<points.length;i++){
+    for (let j=i+1;j<points.length;j++){
+      chords.push({a: points[i], b: points[j]});
+    }
+  }
+}
+
+/* Compute regions */
+function computeRegions(gridN=420){
+  const cellSize = (2*radius)/gridN;
+  const offX = center.x - radius;
+  const offY = center.y - radius;
+
+  function cellCenter(i,j){
+    return { x: offX + (i + 0.5)*cellSize, y: offY + (j + 0.5)*cellSize };
+  }
+
+  const inside = new Uint8Array(gridN*gridN);
+  for (let j=0;j<gridN;j++){
+    for (let i=0;i<gridN;i++){
+      const p = cellCenter(i,j);
+      inside[j*gridN+i] = Math.hypot(p.x-center.x,p.y-center.y) <= radius - (cellSize*0.7) ? 1:0;
+    }
+  }
+
+  const regionId = new Int32Array(gridN*gridN);
+  regionId.fill(-1);
+
+  const neighbors = [[1,0],[-1,0],[0,1],[0,-1]];
+
+  function crossesAnyChord(p1,p2){
+    for (const ch of chords){
+      if (segIntersects(p1,p2,ch.a,ch.b)) return true;
+    }
+    return false;
+  }
+
+  let nextId = 0;
+  regionData = [];
+
+  for (let j=0;j<gridN;j++){
+    for (let i=0;i<gridN;i++){
+      const idx = j*gridN + i;
+      if (!inside[idx] || regionId[idx] !== -1) continue;
+
+      const color = pastelColor(0.65);
+      const q = [idx];
+      regionId[idx] = nextId;
+      let cells = [];
+
+      while(q.length){
+        const cur = q.pop();
+        const cx = cur % gridN, cy = Math.floor(cur / gridN);
+        const pc = cellCenter(cx,cy);
+        cells.push(pc);
+
+        for(const d of neighbors){
+          const nx=cx+d[0], ny=cy+d[1];
+          if(nx<0||nx>=gridN||ny<0||ny>=gridN) continue;
+          const nidx = ny*gridN+nx;
+          if(!inside[nidx]||regionId[nidx]!==-1) continue;
+          const p2 = cellCenter(nx,ny);
+          if(!crossesAnyChord(pc,p2)){
+            regionId[nidx] = nextId;
+            q.push(nidx);
+          }
+        }
+      }
+
+      // barycentre
+      let bx=0,by=0;
+      for(const p of cells){ bx+=p.x; by+=p.y; }
+      bx/=cells.length; by/=cells.length;
+      regionData.push({id: nextId, color, center: {x:bx,y:by}, selected:false});
+      nextId++;
+    }
+  }
+
+  lastRegionMap = {regionId,gridN,cellSize,offX,offY};
+  return {regionId,gridN,cellSize,offX,offY};
+}
+
+/* Formule A000127 */
+function choose(n,k){
+  if(k<0||k>n) return 0;
+  let num=1, den=1;
+  for(let i=1;i<=k;i++){ num*=(n-(k-i)); den*=i; }
+  return Math.round(num/den);
+}
+
+/* Draw everything */
+function drawAll(){
+  Ex1ctx.clearRect(0,0,Ex1canvas.width,Ex1canvas.height);
+
+  // cercle extérieur
+  Ex1ctx.beginPath();
+  Ex1ctx.arc(center.x,center.y,radius,0,Math.PI*2);
+  Ex1ctx.fillStyle="#fff"; Ex1ctx.fill();
+  Ex1ctx.strokeStyle="#444"; Ex1ctx.lineWidth=2; Ex1ctx.stroke();
+
+  // si points > 0 → construire les régions
+  if(points.length>0){
+    buildChords();
+    const res = computeRegions(420);
+    const {regionId,gridN,cellSize,offX,offY} = res;
+
+    // colorier régions
+    for(let j=0;j<gridN;j++){
+      for(let i=0;i<gridN;i++){
+        const idx=j*gridN+i, rid=regionId[idx];
+        if(rid===-1) continue;
+        Ex1ctx.fillStyle = regionData[rid].color;
+        Ex1ctx.fillRect(offX+i*cellSize, offY+j*cellSize, cellSize+0.5, cellSize+0.5);
+      }
+    }
+
+    // dessiner cordes
+    Ex1ctx.lineWidth=1.6; Ex1ctx.strokeStyle="rgba(20,20,30,0.9)";
+    for(const ch of chords){
+      Ex1ctx.beginPath(); Ex1ctx.moveTo(ch.a.x,ch.a.y); Ex1ctx.lineTo(ch.b.x,ch.b.y); Ex1ctx.stroke();
+    }
+  }
+
+  // cercle final
+  Ex1ctx.beginPath();
+  Ex1ctx.arc(center.x,center.y,radius,0,Math.PI*2);
+  Ex1ctx.strokeStyle="#222"; Ex1ctx.lineWidth=2.6; Ex1ctx.stroke();
+
+  // dessiner points
+  Ex1ctx.fillStyle="#000";
+  for(const p of points){
+    Ex1ctx.beginPath(); Ex1ctx.arc(p.x,p.y,6.5,0,Math.PI*2); Ex1ctx.fill();
+    Ex1ctx.beginPath(); Ex1ctx.arc(p.x,p.y,3.4,0,Math.PI*2); Ex1ctx.fillStyle="#fff"; Ex1ctx.fill();
+    Ex1ctx.fillStyle="#000";
+  }
+
+  // dessiner points rouges sélection
+  for(const r of regionData){
+    if(r.selected){
+      Ex1ctx.beginPath();
+      Ex1ctx.arc(r.center.x,r.center.y,5,0,Math.PI*2);
+      Ex1ctx.fillStyle="red"; Ex1ctx.fill();
+    }
+  }
+
+  // stats
+  const n = points.length;
+  const formula = (n>=0) ? (choose(n,4)+choose(n,2)+1) : "?";
+  statsEl.innerHTML = `${n} point(s). Formule A000127 = <strong>${formula}</strong>. Régions détectées = <strong>${regionData.length}</strong>.`;
+  selCountEl.textContent = regionData.filter(r=>r.selected).length;
+}
+
+/* Interactions */
+Ex1canvas.addEventListener('click',(e)=>{
+  const rect = Ex1canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left, y = e.clientY - rect.top;
+  const dx = x-center.x, dy = y-center.y;
+  const dist = Math.hypot(dx,dy);
+
+  // 1. clic bord cercle → ajouter point
+  if(Math.abs(dist - radius) < 15){
+    if(points.length>=6) return;
+    const px=center.x + dx/dist*radius, py=center.y + dy/dist*radius;
+    points.push({x:px,y:py});
+    drawAll();
+    return;
+  }
+
+  // 2. clic à l'intérieur → sélectionner/désélectionner région
+  if(dist < radius && lastRegionMap){
+    const {gridN,cellSize,offX,offY,regionId} = lastRegionMap;
+    const i = Math.floor((x-offX)/cellSize);
+    const j = Math.floor((y-offY)/cellSize);
+    if(i>=0 && i<gridN && j>=0 && j<gridN){
+      const rid = regionId[j*gridN+i];
+      if(rid !== -1){
+        const region = regionData.find(r=>r.id===rid);
+        region.selected = !region.selected;
+        drawAll();
+        return;
+      }
+    }
+  }
+});
+
+clearBtn.addEventListener('click',()=>{
+  points.length=0; regionData.length=0; lastRegionMap=null;
+  drawAll();
+});
+
+drawAll();
+</script>
+
+</div>
+
+<h2 id="les-nombres-de-catalan">Les nombres de Catalan</h2>
+<p>Les nombres de Catalan sont décrits pour la première fois en 1751 par le Suisse Leonhard Euler, dans une lettre à Goldbach : il pose le problème du dénombrement des triangulations d'un polygone.  </p>
+<p>La triangulation d'un polygone consiste à décomposer ce polygone en un ensemble (fini) de triangles qui recouvrent entièrement le polygône et qui ne se chevauchent pas. Les sommets utilisés pour les triangles sont les mêmes que ceux du polygône.  </p>
+<center>
+    <img src="./images/triangulation.png" alt="image" width="400" height="auto">
+</center>
+
+<p>On s'intéresse dans cette partie, à la triangulation de polygônes convexes (c'est à dire sans angle rentrant).  </p>
+<ol>
+<li>Dans l'application ci-dessous, sélectionnez une taille de polygône puis triangularisez le en cliquant sur les sommets.<br />
+Une fois toutes les triangulations trouvées, passez au polygône suivant.</li>
+</ol>
+<div class="map2">
+<style>
+  #container {
+    display: flex;
+    flex-wrap: wrap
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  canvas { 
+    border:1px solid black; 
+  }
+
+  #controls { 
+    margin-bottom:10px; 
+  }
+
+  #message { 
+    margin-top:10px; 
+    font-weight:bold; 
+  }
+
+  /* Cadre pour les miniatures */
+  #saved-container {
+    overflow-y: auto;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    height: 505px;
+    margin-left: 10px;
+  }
+
+  #saved-container h3 {
+    margin-top: 0;
+  }
+
+  #saved {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 miniatures par ligne */
+  gap: 10px;
+}
+
+  #saved img { 
+    border:1px solid #ccc; 
+    width:100px; 
+    height:100px; 
+    object-fit:contain; 
+  }
+</style>
+
+<div id="controls">
+  <label for="sides">Nombre de côtés : </label>
+  <select id="sides">
+    <option value="4" selected>4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+  </select>
+</div>
+
+<div id="container">
+  <div>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <div id="message"></div>
+  </div>
+  <div id="saved-container">
+    <h3>Triangulations sauvegardées :</h3>
+    <div id="saved"></div>
+  </div>
+</div>
+
+<script>
+// --- le même script que vous aviez, sans modification du code JS ---
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+let sides = 4;
+let radius2 = 200;
+let center2 = {x:250, y:250};
+let vertices = [];
+let diagonals = [];
+let selectedVertex = null;
+let mousePos = {x:0, y:0};
+let savedConfigurations = [];
+const catalanNumbers = [2,5,14]; // total triangulations pour n=4,5,6
+let colors = [];
+
+function initPolygon(){
+    vertices=[];
+    diagonals=[];
+    selectedVertex=null;
+    colors=[];
+    const angleStep = 2*Math.PI/sides;
+    for(let i=0;i<sides;i++){
+        const angle = i*angleStep - Math.PI/2;
+        vertices.push({x:center2.x + radius2*Math.cos(angle), y:center2.y + radius2*Math.sin(angle), index:i});
+    }
+    drawPolygon();
+    updateMessage();
+}
+
+function drawPolygon(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    const triangles = computeTriangles();
+    if(triangles.length>0){
+        for(let i=0;i<triangles.length;i++){
+            ctx.beginPath();
+            ctx.moveTo(vertices[triangles[i][0]].x, vertices[triangles[i][0]].y);
+            ctx.lineTo(vertices[triangles[i][1]].x, vertices[triangles[i][1]].y);
+            ctx.lineTo(vertices[triangles[i][2]].x, vertices[triangles[i][2]].y);
+            ctx.closePath();
+            if(!colors[i]) colors[i]='hsl(' + Math.random()*360 + ',70%,70%)';
+            ctx.fillStyle = colors[i];
+            ctx.fill();
+            ctx.strokeStyle='black';
+            ctx.stroke();
+        }
+    }
+
+    ctx.beginPath();
+    ctx.moveTo(vertices[0].x, vertices[0].y);
+    for(let i=1;i<vertices.length;i++) ctx.lineTo(vertices[i].x, vertices[i].y);
+    ctx.closePath();
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = 2;
+    for(let d of diagonals){
+        ctx.beginPath();
+        ctx.moveTo(vertices[d[0]].x, vertices[d[0]].y);
+        ctx.lineTo(vertices[d[1]].x, vertices[d[1]].y);
+        ctx.stroke();
+    }
+
+    if(selectedVertex !== null){
+        ctx.beginPath();
+        ctx.moveTo(vertices[selectedVertex].x, vertices[selectedVertex].y);
+        ctx.lineTo(mousePos.x, mousePos.y);
+        ctx.strokeStyle = 'gray';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+    }
+
+    for(let v of vertices){
+        ctx.beginPath();
+        ctx.arc(v.x,v.y,6,0,2*Math.PI);
+        ctx.fillStyle='blue';
+        ctx.fill();
+    }
+}
+
+function getVertexClick(x,y){
+    for(let v of vertices){
+        const dx = x-v.x;
+        const dy = y-v.y;
+        if(Math.sqrt(dx*dx+dy*dy)<10) return v.index;
+    }
+    return null;
+}
+
+function validDiagonal(v1,v2){
+    if(Math.abs(v1-v2)===1 || Math.abs(v1-v2)===sides-1) return false;
+    for(let d of diagonals){
+        const [a,b]=d;
+        if([v1,v2].includes(a) || [v1,v2].includes(b)) continue;
+        if(segmentsIntersect(vertices[v1], vertices[v2], vertices[a], vertices[b])) return false;
+    }
+    return true;
+}
+
+function segmentsIntersect(p1,p2,p3,p4){
+    function ccw(a,b,c){return (c.y-a.y)*(b.x-a.x) > (b.y-a.y)*(c.x-a.x);}
+    return ccw(p1,p3,p4) !== ccw(p2,p3,p4) && ccw(p1,p2,p3) !== ccw(p1,p2,p4);
+}
+
+canvas.addEventListener('click', e=>{
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const clicked = getVertexClick(x,y);
+    if(clicked !== null){
+        if(selectedVertex === null){
+            selectedVertex = clicked;
+        } else {
+            if(clicked !== selectedVertex && validDiagonal(selectedVertex, clicked)){
+                diagonals.push([selectedVertex, clicked]);
+                updateMessage(`Diagonale tracée !`);
+            } else {
+                updateMessage(`Diagonale invalide.`);
+            }
+            selectedVertex = null;
+            drawPolygon();
+            if(diagonals.length === sides-3){
+                if(saveConfiguration()){
+                    updateMessage(`Nouvelle triangulation trouvée !`);
+                } else {
+                    updateMessage(`Triangulation déjà trouvée.`);
+                }
+                setTimeout(initPolygon, 2000);
+            }
+        }
+    }
+});
+
+canvas.addEventListener('mousemove', e=>{
+    const rect = canvas.getBoundingClientRect();
+    mousePos.x = e.clientX - rect.left;
+    mousePos.y = e.clientY - rect.top;
+    drawPolygon();
+});
+
+function updateMessage(text){
+    const c = `${savedConfigurations.length}`;
+    document.getElementById('message').textContent = (text? text+' ':'') + `Triangulations trouvées : ${c}`;
+}
+
+function computeTriangles(){
+    let allEdges = [];
+    for(let i=0;i<sides;i++){
+        allEdges.push([i,(i+1)%sides]);
+    }
+    allEdges = allEdges.concat(diagonals);
+    let triangles = [];
+    for(let i=0;i<sides;i++){
+        for(let j=i+1;j<sides;j++){
+            for(let k=j+1;k<sides;k++){
+                const edges = [[i,j],[j,k],[k,i]];
+                if(edges.every(e=>allEdges.some(a=>(a[0]===e[0] && a[1]===e[1])||(a[0]===e[1] && a[1]===e[0])))){
+                    triangles.push([i,j,k]);
+                }
+            }
+        }
+    }
+    return triangles;
+}
+
+function saveConfiguration(){
+    // Normaliser les diagonales : mettre le plus petit index en premier
+    const normalize = d => d[0] < d[1] ? [d[0], d[1]] : [d[1], d[0]];
+    const current = diagonals.map(normalize).sort((a,b) => a[0]-b[0] || a[1]-b[1]);
+
+    for(let conf of savedConfigurations){
+        const saved = conf.map(normalize).sort((a,b) => a[0]-b[0] || a[1]-b[1]);
+        // comparer chaque diagonale
+        if(saved.length === current.length && saved.every((d,i) => d[0]===current[i][0] && d[1]===current[i][1])){
+            return false; // triangulation déjà existante
+        }
+    }
+
+    savedConfigurations.push(JSON.parse(JSON.stringify(diagonals)));
+
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = 100;
+    tempCanvas.height = 100;
+    const tctx = tempCanvas.getContext('2d');
+
+    const scale = 100/(radius*2 + 20);
+    const offset = 50;
+    tctx.strokeStyle = 'black';
+    tctx.lineWidth = 1;
+    const scaledVertices = vertices.map(v=>({x:offset+(v.x-center2.x)*scale, y:offset+(v.y-center2.y)*scale}));
+
+    const triangles = computeTriangles();
+    for(let i=0;i<triangles.length;i++){
+        tctx.beginPath();
+        tctx.moveTo(scaledVertices[triangles[i][0]].x, scaledVertices[triangles[i][0]].y);
+        tctx.lineTo(scaledVertices[triangles[i][1]].x, scaledVertices[triangles[i][1]].y);
+        tctx.lineTo(scaledVertices[triangles[i][2]].x, scaledVertices[triangles[i][2]].y);
+        tctx.closePath();
+        tctx.fillStyle = colors[i] || 'gray';
+        tctx.fill();
+        tctx.stroke();
+    }
+
+    const img = document.createElement('img');
+    img.src = tempCanvas.toDataURL();
+    document.getElementById('saved').appendChild(img);
+
+    return true;
+}
+
+document.getElementById('sides').addEventListener('change', e=>{
+    sides=parseInt(e.target.value);
+    savedConfigurations = [];
+    document.getElementById('saved').innerHTML='';
+    initPolygon();
+});
+
+initPolygon();
+</script>
+
+</div>
+
+<h2 id="le-probleme-des-8-dames">Le problème des 8 dames</h2>
+<p>Le but du problème des huit dames est de placer huit dames d'un jeu d'échecs sur un échiquier de 8 × 8 cases sans que les dames puissent se menacer mutuellement, conformément aux règles du jeu d'échecs (la couleur des pièces étant ignorée). Par conséquent, deux dames ne doivent jamais partager la même rangée, colonne, ou diagonale.  </p>
+<p>Pour faciliter le comptage du nombre de solutions, on propose de travailler sur trois tailles d'échiquier. Un 4x4, un 5x5 et un 6x6.  </p>
+<p>Pour chacune des tailles ci-dessous, déterminer le nombre de solutions au problème.<br />
+Vous pouvez placer des dames en cliquant sur les cases et les retirer en cliquant à nouveau dessus.</p>
+<div class="map3">
+<style>
+  #container2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  #mainArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  canvas {
+    border: 2px solid #000;
+    border-radius: 6px;
+  }
+  #controls { 
+    margin-bottom:10px; 
+  }
+  #solutionsPanel {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    width: 655px;
+    height: 355px;
+  }
+
+  #solutionsPanel h3{
+    margin-top:0px;
+  }
+
+  #solutionsList {
+    display: grid;
+    grid-template-columns: repeat(5, 120px); /* 5 colonnes fixes */
+    gap: 10px; /* espace constant */
+    justify-content: start;
+  }
+
+  .solution {
+    display: flex;
+    justify-content: center;
+  }
+
+  .solution div {
+    display: grid;
+    overflow: hidden;
+}
+  .solution .cell {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+  }
+  #counter {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+</style>
+
+<div id="controls">
+  <label>Taille de l'échiquier : </label>
+  <select id="sizeSelect">
+    <option value="4" selected>4 × 4</option>
+    <option value="5">5 × 5</option>
+    <option value="6">6 × 6</option>
+  </select>
+</div>
+
+<div id="container2">
+  <div id="mainArea">
+    <canvas id="boardCanvas" width="350" height="350"></canvas>
+    <p id="counter">0</p>
+  </div>
+
+  <div id="solutionsPanel">
+    <h3>Solutions trouvées :</h3>
+    <div id="solutionsList"></div>
+  </div>
+</div>
+
+<script>
+let size = parseInt(document.getElementById('sizeSelect').value);
+let board = [];
+let solutionCount = 0;
+let totalSolutions = 0;
+let solutions = [];
+
+const boardCanvasVar = document.getElementById('boardCanvas');
+const boardCtxVar = boardCanvasVar.getContext('2d');
+const solutionsListDiv = document.getElementById('solutionsList');
+const counter = document.getElementById('counter');
+const sizeSelect = document.getElementById('sizeSelect');
+
+function createBoard() {
+  board = Array(size).fill(null).map(() => Array(size).fill(false));
+  solutions = [];
+  solutionCount = 0;
+  counter.textContent = `${solutionCount}`;
+  solutionsListDiv.innerHTML = '';
+  renderBoard();
+  computeTotalSolutions();
+}
+
+function renderBoard() {
+  boardCtxVar.clearRect(0, 0, boardCanvasVar.width, boardCanvasVar.height);
+  const cellSize = boardCanvasVar.width / size;
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      boardCtxVar.fillStyle = (r + c) % 2 ? '#d18b46' : '#fece9e';
+      boardCtxVar.fillRect(c * cellSize, r * cellSize, cellSize, cellSize);
+
+      if (board[r][c]) {
+        boardCtxVar.fillStyle = isCellValid(r, c) ? '#000' : 'red';
+        boardCtxVar.font = `${cellSize * 0.8}px serif`;
+        boardCtxVar.textAlign = "center";
+        boardCtxVar.textBaseline = "middle";
+        boardCtxVar.fillText('♛', c * cellSize + cellSize / 2, r * cellSize + cellSize / 2);
+      }
+    }
+  }
+}
+
+boardCanvasVar.addEventListener('click', (e) => {
+  const rect = boardCanvasVar.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const cellSize = boardCanvasVar.width / size;
+  const c = Math.floor(x / cellSize);
+  const r = Math.floor(y / cellSize);
+
+  board[r][c] = !board[r][c];
+  renderBoard();
+
+  if (countQueens() === size && isValidBoard()) {
+    const boardStr = board.map(row => row.map(cell => cell ? 'Q' : '.').join('')).join(',');
+    if (!solutions.includes(boardStr)) {
+      solutions.push(boardStr);
+      solutionCount++;
+      counter.textContent = `${solutionCount}`;
+      addSolutionVisual(boardStr);
+
+      setTimeout(() => {
+        board = Array(size).fill(null).map(() => Array(size).fill(false));
+        renderBoard();
+      }, 2000);
+    }
+  }
+});
+
+function countQueens() {
+  return board.flat().filter(v => v).length;
+}
+
+function isValidBoard() {
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      if (board[r][c] && !isCellValid(r, c)) return false;
+    }
+  }
+  return true;
+}
+
+function isCellValid(r, c) {
+  for (let i = 0; i < size; i++) {
+    if (i !== r && board[i][c]) return false;
+    if (i !== c && board[r][i]) return false;
+  }
+  for (let i = -size; i < size; i++) {
+    if (r+i >= 0 && r+i < size && c+i >= 0 && c+i < size && i !== 0 && board[r+i][c+i]) return false;
+    if (r+i >= 0 && r+i < size && c-i >= 0 && c-i < size && i !== 0 && board[r+i][c-i]) return false;
+  }
+  return true;
+}
+
+function addSolutionVisual(boardStr) {
+  const solDiv = document.createElement('div');
+  solDiv.className = 'solution';
+  const gridDiv = document.createElement('div');
+  gridDiv.style.gridTemplateColumns = `repeat(${size}, 20px)`;
+  gridDiv.style.gridTemplateRows = `repeat(${size}, 20px)`;
+
+  const rows = boardStr.split(',');
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      const cellDiv = document.createElement('div');
+      cellDiv.className = 'cell';
+      cellDiv.style.width = '20px';
+      cellDiv.style.height = '20px';
+      cellDiv.style.backgroundColor = (r+c)%2 ? '#d18b46' : '#fece9e';
+      cellDiv.textContent = rows[r][c] === 'Q' ? ' ♛' : '';
+      gridDiv.appendChild(cellDiv);
+    }
+  }
+  solDiv.appendChild(gridDiv);
+  solutionsListDiv.appendChild(solDiv);
+}
+
+function computeTotalSolutions() {
+  let count = 0;
+  function backtrack(row, cols, diag1, diag2) {
+    if (row === size) { count++; return; }
+    for (let col = 0; col < size; col++) {
+      if (cols.has(col) || diag1.has(row-col) || diag2.has(row+col)) continue;
+      cols.add(col); diag1.add(row-col); diag2.add(row+col);
+      backtrack(row+1, cols, diag1, diag2);
+      cols.delete(col); diag1.delete(row-col); diag2.delete(row+col);
+    }
+  }
+  backtrack(0, new Set(), new Set(), new Set());
+  totalSolutions = count;
+  counter.textContent = `${solutionCount}`;
+}
+
+sizeSelect.addEventListener('change', () => {
+  size = parseInt(sizeSelect.value);
+  createBoard();
+});
+
+createBoard();
+</script>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2025 David Wrobel
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
